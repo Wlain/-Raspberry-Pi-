@@ -1,0 +1,11 @@
+body{margin:0;background-color:#ededed;color: rgba(6, 14, 28, 0.99);}
+.box{border:1px solid #ccc;background: #6076ff;width:400px;margin:20px auto;padding:10px 30px;}
+.title{font-size:25px;text-align:center;padding:10px 0;border-bottom:1px dotted #999;margin-bottom:20px;}
+.login{border-collapse:collapse;margin:0 auto;margin-bottom:16px;}
+.login th{font-weight:normal;text-align:right;padding:8px 0;vertical-align:top;}
+.login input[type=text]{border:1px solid #bbb;padding:3px;color:#333;width:150px;}
+.login input[type=password]{border:1px solid #bbb;padding:3px;color:#333;width:150px;}
+.login input[type=submit]{padding:3px 16px;cursor:pointer;margin-top:10px;}
+.login .captcha{line-height:14px;}
+.login .captcha img{float:left;margin-right:10px;margin-top:3px;width:100px;height:30px;}
+.login .captcha a{font-size:12px;color:#36f;}

@@ -1,0 +1,47 @@
+body{margin:0;background-color:#ededed;}
+table{border-collapse:collapse;}
+.box{width:90%;min-width:500px;margin:20px auto;border:1px solid #ccc;font-size:12px;font-family:"simsun";background:#fff;overflow:hidden;}
+.title{line-height:60px;border-bottom: 1px solid #ccc;font-size:2em;font-weight:bold;padding-left:20px;}
+.main{font-size:14px;color:#555;margin-left:150px;}
+.menu{float:left;width:150px;margin-bottom:20px;margin-left:-150px;}
+.menu ul{margin:0px;padding:0px;list-style:none;}
+.menu li{height:36px;line-height:36px;border-bottom:1px solid #ccc;border-right:1px solid #ccc;padding-left:29px;}
+.menu-title1,.menu-title2{font-size:14px;font-weight:900;color:#333;}
+.menu-title1{background:url("../images/ui.png") no-repeat -72px -170px;}
+.menu-title2{background:url("../images/ui.png") no-repeat -72px -78px;}
+.menu a{color:#555;text-decoration:none;font-size:13px;}
+.menu .current{border-right:0;}
+.menu .current a{color:#5b79f8;}
+.main-title{height:36px;line-height:36px;padding-left:20px;font-size:14px;font-weight:900;border-bottom:1px solid #ccc;}
+.main-content{margin:15px;font-size:14px;}
+.userinfo input[type=text]{border:1px solid #bbb;padding:3px;color:#555;width:200px;}
+.userinfo th{padding:10px 0;text-align:right;font-weight:normal;vertical-align:top;}
+.userinfo td{padding:4px 0;}
+.userinfo select{padding:3px;color:#555;}
+.userinfo textarea{width:400px;height:80px;padding:2px;color:#555;}
+.userinfo input[type=submit]{padding:3px 10px;cursor:pointer;}
+.userinfo input[type=reset]{padding:3px 10px;cursor:pointer;}
+.tip{margin:10px 0 10px 27px;color:#0066ff;}
+.photo th{padding:10px 0;text-align:right;font-weight:normal;}
+.photo td{padding:10px 0;}
+.photo input[type=submit]{padding:3px 10px;cursor:pointer;}
+
+.album-act{overflow:hidden;}
+.album-act input[type=text]{border:1px solid #bbb;padding:3px;color:#555;width:150px;}
+.album-act input[type=submit]{padding:2px 8px;cursor:pointer;}
+.album-act-each{float:left;margin-right:20px;margin-bottom:15px;}
+
+.album-position{background:#ededed;border-bottom:1px solid #dedede;border-top:1px solid #dedede;padding:8px 10px;}
+.album-position a{color:#555;text-decoration:none;}
+.album-position a:hover{text-decoration:underline;}
+.album-folder{padding:2px 10px;background:#fafafa;border-bottom:2px solid #ddd;line-height:30px;}
+.album-folder a{color:#555;text-decoration:none;margin-right:22px;}
+.album-folder a:hover{text-decoration:underline;}
+
+.album-file{overflow:hidden;}
+.album-file-flow{width:25%;float:left;text-align:center;}
+.album-file-flow div{width:93%;background:#fff;box-shadow:0px 2px 3px 1px #ccc;margin:5% auto;padding:5% 0;}
+.album-file-flow div:hover{box-shadow:0px 2px 3px 1px #999;}
+.album-file-flow img{width:90%;}
+.album-file-flow span{color:#777;font-size:12px;word-wrap:break-word;padding:4%;}
+

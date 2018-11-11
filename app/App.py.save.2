@@ -1,0 +1,211 @@
+#-*- coding:utf-8 -*-
+#!/usr/bin/env python
+# @Time    : 2018/3/1 14:45
+# @File    : App.py
+# @Author  : 陈威彪
+
+#-*- coding:utf-8 -*-
+from importlib import import_module
+import os
+#导入Flask扩展
+from flask import Flask, render_template, Response,request,flash,redirect,url_for
+#from flask.ext.bootstrap import Bootstrap
+from flask_login import LoginManager
+from flask_sqlalchemy import SQLAlchemy
+from entity.Form import Login_Form,Register_Form
+from camera.camera_opencv import Camera
+from cmd.cmd import cmd
+import RPi.GPIO as GPIO
+import time
+import sys
+#重新加载sys模块，为什么必须要加载详情请看我的第一篇python文章
+reload(sys)
+#重新设置字符集（此时不会出现提示，别怀疑自己敲错了）
+sys.setdefaultencoding("utf-8")
+
+
+#创建Flask应用实例
+app = Flask(__name__)
+#bootstrap = Bootstrap(app)
+#各项插件的配置
+app.secret_key = 'passwd'
+#配置数据库地址
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:unix_socket@127.0.0.1/pi'
+#跟踪数据库的修改----》不建议开启，未来的版本中会移除
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=True
+db = SQLAlchemy(app)
+
+db.init_app(app)
+login_manger=LoginManager()
+login_manger=LoginManager()
+login_manger.session_protection='strong'
+login_manger.login_view='view.login'
+login_manger.init_app(app)
+
+#初始化GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(12,GPIO.OUT)
+
+def gen2(camera):
+    """Returns a single image frame"""
+    frame = camera.get_frame()
+    yield frame
+
+@app.route('/led_on')
+def led_on():
+    GPIO.output(12, False)
+    return render_template('index.html')
+
+@app.route('/led_off')
+def led_off():
+    GPIO.output(12, True)
+    return render_template('index.html')
+
+@app.route('/led_flash')
+def led_flash():
+    i = 0
+    while i<5:
+	GPIO.output(12,True)
+	time.sleep(5)
+	GPIO.output(12,False)
+	i=i+1
+    return render_template('index.html')
+
+@app.route('/image.jpg')
+def image():
+    """Returns a single current image for the webcam"""
+    return Response(gen2(Camera()), mimetype='image/jpeg')
+
+@app.route('/read')
+def read():
+    str=os.popen('date').read()
+    
+return render_template('index.html')
+
+@app.route('/power_off')
+def power_off():
+    os.system('sudo shutdown -h 0')
+    return render_template('index.html')
+
+@app.route('/reboot')
+def reboot():
+    os.system('sudo reboot')
+    return render_template('index.html')
+
+
+class Users(db.Model):
+
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(16), unique=True,index=True)
+    password = db.Column(db.String(32),unique=True, index=True)
+
+    def __init__(self,name,password):
+        self.name=name
+        self.password=password
+
+    #repr()方法显示一个可读字符串
+    def __repr__(self):
+        return '<User:%s %s >'% (self.name,self.password)
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+@app.route('/index',methods=['GET','POST'])
+def index():
+   # cmd()
+    #比如需要传入一个网址
+    url_str = 'www.baidu.com'
+
+    my_list =[1,3,5,7,8]
+    my_disk = {
+        'name': 'william',
+        'sex' : 'man',
+        'age' : 23
+    }
+    my_int =10
+    return render_template("index.html",url_str=url_str,my_list = my_list,my_disk=my_disk,my_int=my_int)
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    login_form = Login_Form()
+    #request:请求对象--获取请求方式、数据
+    #1.判断请求方式
+    if request.method == "POST":
+        #2.获取请求方式
+        username = request.form.get('username')
+        password = request.form.get( 'password')
+        password2 = request.form.get('password2')
+
+        print(username)
+        print(password)
+        print(password2)
+        #3.判断参数是否填写，密码是否相同
+
+        if login_form.validate_on_submit():
+            user = Users.query.filter_by( name = login_form.username.data).first()
+            if user is not None and user.password == login_form.password.data:
+                print(username,password)
+                flash('登录成功')
+                #return 'success'
+                return redirect(url_for('index'))
+            else:
+                flash('账号或者密码错误，请先注册')
+        else:
+            flash('填入的参数有误，或者您尚未注册')
+    return render_template("login2.html",form=login_form)
+
+#<>定义一个理由是参数<>内需要起名字
+#使用同一个视图函数，来显示不同用户的订单信息
+@app.route('/order/<int:order_id>')
+def get_order_id(order_id):
+    #
+    return 'order_id is %s' % order_id
+
+
+
+@app.route('/',methods=['GET','POST'])
+def register():
+    register_Form=Register_Form()
+    if register_Form.validate_on_submit():
+        user=Users(name=register_Form.username.data,password=register_Form.password.data)
+        print(user)
+        db.session.add(user)
+        db.session.commit()
+        #flash('注册成功')
+        return redirect(url_for('login'))
+    return render_template('register.html',form=register_Form)
+
+'''
+给模板传递消息
+flash-->需要对内容加密
+模板中需要遍历
+'''
+@app.route('/led')
+def Led():
+    pass
+
+#定义路由及其视图函数
+#flask中定义路由是通过装饰器实现的
+#启动程序
+
+if __name__ == '__main__':
+
+    # 删除表
+    db.drop_all()
+    # #创建表
+    db.create_all()
+    #
+    # user1 = User(name = 'Wang',password ='123456')
+    # user2 = User(name='Li', password='123456')
+    # db.session.add_all([user1,user2])
+    # db.session.commit()
+
+    #执行App.run 就会将flask程序运行在一个建议的服务器上（Flask提供）
+    app.run(host='0.0.0.0', threaded=True)

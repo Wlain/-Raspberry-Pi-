@@ -1,0 +1,50 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>基于Raspberry Pi的数据采集系统</title>
+    <script src="../static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+      <style>
+      a {
+        width:100%
+      }
+  </style>
+    <style type="text/css">
+        .page-header { margin: 20px 0; border-bottom: 1px solid #eee; padding-bottom: 0; text-align: center; }
+        .btn-item { text-align: center; }
+        i { margin-right: 3px; display: inline-block; }
+        h1 { text-align: center; }
+        .tip { font-weight: bold; color: black; }
+        .lead { font-size: small;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="container">
+        <div class="page-header">
+            <h3 class="text-info" style="font-size: 40px">
+                欢迎来到数据采集系统</h3>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                以下是图像识别的结果</div>
+            <div class="panel-body">
+     <div style="width: 900px; height: 500px;" class="text-center">
+       {# 下面是一个变量代码块的使用 #}
+         <br>
+        <a class="alert-info" style="font-size:50px;"> {{ str }}</a>
+         </br>
+         <img src="../image/1.jpg" alt="">
+    </div>
+</body>
+</html>
+

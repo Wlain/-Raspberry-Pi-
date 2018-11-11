@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>基于Raspberry Pi的图像识别系统</title>
+    <script src="../static/js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+      <style>
+      a {
+        width:100%
+      }
+  </style>
+    <style type="text/css">
+        .page-header { margin: 20px 0; border-bottom: 1px solid #eee; padding-bottom: 0; text-align: center; }
+        .btn-item { text-align: center; }
+        i { margin-right: 3px; display: inline-block; }
+        h1 { text-align: center; }
+        .tip { font-weight: bold; color: black; }
+        .lead { font-size: small;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h3 class="text-info" style="font-size: 40px">
+                欢迎来到图像识别系统</h3>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                设备</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-3 btn-item">
+                    </div>
+                    <div class="col-xs-3  btn-item">
+                             <a href="/read" class="fa fa-power-off btn btn-danger "  role="butoon">关机</a>
+                    </div>
+                    <div class="col-xs-3 btn-item">
+                             <a href="/time" class="fa fa-refresh btn btn-info" role="butoon">重启</a>
+                    </div>
+                    <div class="col-xs-3 btn-item">
+
+                </div>
+            </div>
+             </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                传感器</div>
+            <div class="panel-body">
+                <div class="row">
+                      <a href="/led_on" class="btn btn-success btn-lg fa fa-battery-full" role="butoon">开灯</a>
+                    </div>
+                    </br>
+                    <div class="row">
+                      <a href="/led_off" class=" btn btn-info btn-lg fa fa-battery-0" role="button">关灯</a>
+                    </div>
+		    </br>
+		    <div class="row">
+                    <a href="/relay_on" class="btn btn-success btn-lg fa fa-battery-full" role="butoon">打开继电器</a>
+                    </div>
+                    </br>
+                    <div class="row">
+                      <a href="/relay_off" class=" btn btn-info btn-lg fa fa-battery-0" role="button">关闭继电器</a>
+                    </div>
+                    </br>
+
+                    </br>
+                    <div class="row">
+                      <a href="/image.jpg" class="btn btn-success btn-lg fa fa-file-photo-o" role="butoon">拍照</a>
+                    </div>
+                    </br>
+                    <div class="row">
+                      <a href="/recognition" class="btn btn-info btn-lg fa fa-flag" role="butoon">图像识别</a>
+                    </div>
+                    </br>
+                    <div class="row">
+                      <a href="/more_function" class="btn btn-success btn-lg fa " role="butoon">更多功能。。。</a>
+                    </div>
+            </div>
+            <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+          <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+          <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        </div>
+        <div class="panel panel-primary" style="border-color:#555">
+            <div class="panel-heading" style="background: #555">
+                终端</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-success" style="" role="alert">
+                            执行：<span class="tip"> </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>
